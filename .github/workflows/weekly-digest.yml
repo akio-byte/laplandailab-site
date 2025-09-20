@@ -1,0 +1,26 @@
+name: Weekly Digest
+on:
+  schedule:
+    - cron: "0 15 * * 0"  # 15:00 UTC = 18:00 Helsinki on Sundays
+  workflow_dispatch:
+
+jobs:
+  build_digest:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm ci
+      - name: Generate digest markdown
+        run: node scripts/digest.js
+      - name: Commit and push
+        run: |
+          git config user.name "lab-agent"
+          git config user.email "agent@users.noreply.github.com"
+          git add updates || true
+          git commit -m "chore(digest): weekly post" || echo "No changes"
+          git push
