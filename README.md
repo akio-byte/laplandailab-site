@@ -38,6 +38,12 @@ Lapland AI Labin verkkosivuston koodi. Projekti on rakennettu Vite + React + Typ
 - `src/data` kokoaa staattiset sisältö- ja navigaatiotiedot yhteen paikkaan
 - `src/types` määrittelee ja jakaa tyypit datarakenteille
 
+## CI ja automaatio
+
+- Asenna Netlify GitHub App ja ota käyttöön status checks.
+- Ota branch-suojaus käyttöön `main`-haaralle: vaadi status checkit (Netlify + Build & Lint) ja sallii "Enable auto-merge".
+- Käytä `automerge`-labelia, jos haluat automaattisen yhdistämisen.
+
 ## Lisenssi
 
 Tämä projekti on tarkoitettu Lapland AI Labin sisäiseen käyttöön.

@@ -1,0 +1,16 @@
+name: Create PR from feature branches
+on:
+  push:
+    branches:
+      - "feature/**"
+jobs:
+  pr:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: peter-evans/create-pull-request@v6
+        with:
+          branch: ${{ github.ref_name }}
+          title: "feat(site): ${{ github.ref_name }} (auto)"
+          body: "Auto-PR Codex-muutoksista"
+          labels: automerge
