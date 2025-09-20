@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import type { UpdateItem } from '../types/content'
 
 interface UpdatesSectionProps {
@@ -22,6 +23,14 @@ const UpdatesSection: React.FC<UpdatesSectionProps> = ({
             <h2 className="text-3xl font-semibold text-white sm:text-4xl">{title}</h2>
             {description && <p className="mt-6 text-lg text-gray-300">{description}</p>}
           </div>
+
+          <Link
+            to="/updates"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-sky-300 transition hover:text-sky-200"
+          >
+            Katso kaikki artikkelit
+            <span aria-hidden="true">→</span>
+          </Link>
         </div>
 
         <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3">

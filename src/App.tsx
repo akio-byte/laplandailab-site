@@ -1,68 +1,21 @@
 import React from 'react'
-import SiteFooter from './components/layout/SiteFooter'
-import SiteHeader from './components/layout/SiteHeader'
-import {
-  contactChannels,
-  contactIntro,
-  focusAreas,
-  heroContent,
-  missionDescription,
-  missionItems,
-  navigation,
-  programs,
-  updates,
-} from './data/siteContent'
-import ContactSection from './sections/ContactSection'
-import FocusAreasSection from './sections/FocusAreasSection'
-import HeroSection from './sections/HeroSection'
-import MissionSection from './sections/MissionSection'
-import ProgramsSection from './sections/ProgramsSection'
-import UpdatesSection from './sections/UpdatesSection'
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
+import ScrollToHash from './components/utility/ScrollToHash'
+import HomePage from './pages/HomePage'
+import UpdateArticlePage from './app/updates/[slug]/page'
+import UpdatesPage from './app/updates/page'
 
 const App: React.FC = () => {
   return (
-    <div className="bg-slate-950 text-slate-100">
-      <SiteHeader navigation={navigation} />
-      <main>
-        <HeroSection {...heroContent} />
-
-        <MissionSection
-          title="Toimimme Lapin tekoälyn moottorina"
-          description={missionDescription}
-          items={missionItems}
-        />
-
-        <FocusAreasSection
-          title="Painopistealueet"
-          description="Monialainen kehitystyö keskittyy arktisiin olosuhteisiin sopiviin ratkaisuihin, vastuulliseen liiketoimintaan sekä alueen osaamisen kasvattamiseen."
-          areas={focusAreas}
-        />
-
-        <ProgramsSection
-          title="Ohjelmat ja palvelut"
-          description="Rakennamme polkuja ideasta vaikuttavaksi ratkaisuksi. Ohjelmamme yhdistävät tutkimuksen, yritysten tarpeet ja opiskelijoiden osaamisen."
-          programs={programs}
-        />
-
-        <UpdatesSection
-          title="Ajankohtaista Lapland AI Labissa"
-          description="Seuraa kehitystä ja ajankohtaisia hankkeita. Kerromme säännöllisesti, miten yhteistyö tuottaa tuloksia Lapissa ja kansainvälisesti."
-          updates={updates}
-        />
-
-        <ContactSection
-          title="Ota yhteyttä tiimiimme"
-          description={contactIntro}
-          channels={contactChannels}
-          primaryAction={{
-            label: 'Sovi työpaja tai tapaaminen',
-            href: 'mailto:info@laplandailab.fi',
-          }}
-          note="Kerro viestissä taustastasi ja tavoitteistasi – palaamme pian ehdotuksella etenemisestä."
-        />
-      </main>
-      <SiteFooter navigation={navigation} />
-    </div>
+    <BrowserRouter>
+      <ScrollToHash />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/updates" element={<UpdatesPage />} />
+        <Route path="/updates/:slug" element={<UpdateArticlePage />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 

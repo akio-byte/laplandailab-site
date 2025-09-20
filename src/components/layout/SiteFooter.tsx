@@ -1,41 +1,68 @@
 import React from 'react'
+import { Link, type To } from 'react-router-dom'
 import { NavItem } from '../../types/content'
 
 interface SiteFooterProps {
   navigation: NavItem[]
 }
 
+const resolveTo = (href: string): To | null => {
+  if (href.startsWith('#')) {
+    return { pathname: '/', hash: href }
+  }
+
+  if (href.startsWith('/#')) {
+    const [pathname, hash] = href.split('#')
+    return { pathname: pathname || '/', hash: hash ? `#${hash}` : undefined }
+  }
+
+  if (href.startsWith('/')) {
+    return href
+  }
+
+  return null
+}
+
 const SiteFooter: React.FC<SiteFooterProps> = ({ navigation }) => {
   const year = new Date().getFullYear()
+  const brandTo = resolveTo('#hero') ?? '/'
 
   return (
     <footer className="border-t border-white/10 bg-slate-950">
       <div className="mx-auto max-w-6xl px-6 py-12">
         <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
           <div className="max-w-md space-y-3">
-            <a
-              href="#hero"
+            <Link
+              to={brandTo}
               className="text-lg font-semibold tracking-tight text-white transition hover:text-sky-300"
             >
               Lapland<span className="text-sky-400">AI</span>Lab
-            </a>
+            </Link>
             <p className="text-sm text-gray-400">
-              Lapland AI Lab kokoaa Lapin korkeakoulujen ja yritysten osaamisen yhteen ja
-              auttaa viemään tekoälyn mahdollisuudet käytännön ratkaisuiksi.
+              Lapland AI Lab kokoaa Lapin korkeakoulujen ja yritysten osaamisen yhteen ja auttaa
+              viemään tekoälyn mahdollisuudet käytännön ratkaisuiksi.
             </p>
           </div>
 
           <div className="flex flex-col gap-6 text-sm text-gray-300">
             <nav aria-label="Alavalikko" className="flex flex-wrap gap-4">
-              {navigation.map((item) => (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  className="transition hover:text-white"
-                >
-                  {item.label}
-                </a>
-              ))}
+              {navigation.map((item) => {
+                const to = resolveTo(item.href)
+
+                if (to) {
+                  return (
+                    <Link key={item.href} to={to} className="transition hover:text-white">
+                      {item.label}
+                    </Link>
+                  )
+                }
+
+                return (
+                  <a key={item.href} href={item.href} className="transition hover:text-white">
+                    {item.label}
+                  </a>
+                )
+              })}
             </nav>
             <p className="text-xs text-gray-500">
               © {year} Lapland AI Lab. Kaikki oikeudet pidätetään.
