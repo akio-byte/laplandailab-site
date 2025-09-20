@@ -1,16 +1,69 @@
-import React from 'react';
+import React from 'react'
+import SiteFooter from './components/layout/SiteFooter'
+import SiteHeader from './components/layout/SiteHeader'
+import {
+  contactChannels,
+  contactIntro,
+  focusAreas,
+  heroContent,
+  missionDescription,
+  missionItems,
+  navigation,
+  programs,
+  updates,
+} from './data/siteContent'
+import ContactSection from './sections/ContactSection'
+import FocusAreasSection from './sections/FocusAreasSection'
+import HeroSection from './sections/HeroSection'
+import MissionSection from './sections/MissionSection'
+import ProgramsSection from './sections/ProgramsSection'
+import UpdatesSection from './sections/UpdatesSection'
 
-export default function App() {
+const App: React.FC = () => {
   return (
-    <div className="bg-gray-900 text-white min-h-screen font-sans flex items-center justify-center">
-      <div className="text-center">
-        <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight mb-4">
-          Lapland<span className="text-sky-400">AI</span>Lab
-        </h1>
-        <p className="text-lg md:text-2xl text-gray-300">
-          Sivustoa rakennetaan.
-        </p>
-      </div>
+    <div className="bg-slate-950 text-slate-100">
+      <SiteHeader navigation={navigation} />
+      <main>
+        <HeroSection {...heroContent} />
+
+        <MissionSection
+          title="Toimimme Lapin tekoälyn moottorina"
+          description={missionDescription}
+          items={missionItems}
+        />
+
+        <FocusAreasSection
+          title="Painopistealueet"
+          description="Monialainen kehitystyö keskittyy arktisiin olosuhteisiin sopiviin ratkaisuihin, vastuulliseen liiketoimintaan sekä alueen osaamisen kasvattamiseen."
+          areas={focusAreas}
+        />
+
+        <ProgramsSection
+          title="Ohjelmat ja palvelut"
+          description="Rakennamme polkuja ideasta vaikuttavaksi ratkaisuksi. Ohjelmamme yhdistävät tutkimuksen, yritysten tarpeet ja opiskelijoiden osaamisen."
+          programs={programs}
+        />
+
+        <UpdatesSection
+          title="Ajankohtaista Lapland AI Labissa"
+          description="Seuraa kehitystä ja ajankohtaisia hankkeita. Kerromme säännöllisesti, miten yhteistyö tuottaa tuloksia Lapissa ja kansainvälisesti."
+          updates={updates}
+        />
+
+        <ContactSection
+          title="Ota yhteyttä tiimiimme"
+          description={contactIntro}
+          channels={contactChannels}
+          primaryAction={{
+            label: 'Sovi työpaja tai tapaaminen',
+            href: 'mailto:info@laplandailab.fi',
+          }}
+          note="Kerro viestissä taustastasi ja tavoitteistasi – palaamme pian ehdotuksella etenemisestä."
+        />
+      </main>
+      <SiteFooter navigation={navigation} />
     </div>
-  );
+  )
 }
+
+export default App
