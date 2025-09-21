@@ -22,6 +22,11 @@ export const heroContent = {
   title: 'Rakennamme älykästä ja kestävää tulevaisuutta Lapissa',
   description:
     'Lapland AI Lab yhdistää yritykset, tutkijat ja opiskelijat kehittämään ratkaisuja arktisten olosuhteiden haasteisiin. Tuemme ideasta pilotointiin ja autamme viemään tekoälyn käytännön hyötyihin.',
+  highlights: [
+    'Nopeat proof-of-concept -pilotit Lapin yritysten tarpeisiin',
+    'Yhteiskehittäminen korkeakoulujen ja tutkimusryhmien kanssa',
+    'Käytännön valmennukset tekoälyn hyödyntämiseen henkilöstölle',
+  ],
   primaryAction: { label: 'Varaa tapaaminen', href: '#contact' } satisfies ActionLink,
   secondaryAction: { label: 'Tutustu toimintaamme', href: '#mission' } satisfies ActionLink,
   stats: [

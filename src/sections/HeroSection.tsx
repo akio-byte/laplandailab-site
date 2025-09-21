@@ -7,6 +7,7 @@ interface HeroSectionProps {
   tagline?: string
   title: string
   description: string
+  highlights?: string[]
   primaryAction: ActionLink
   secondaryAction?: ActionLink
   stats?: HeroStat[]
@@ -17,6 +18,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
   tagline,
   title,
   description,
+  highlights,
   primaryAction,
   secondaryAction,
   stats,
@@ -44,6 +46,20 @@ const HeroSection: React.FC<HeroSectionProps> = ({
           </h1>
 
           <p className="mt-6 text-lg text-gray-300 sm:text-xl">{description}</p>
+
+          {highlights && highlights.length > 0 && (
+            <ul className="mt-8 space-y-3 text-left text-base text-white/90">
+              {highlights.map((highlight) => (
+                <li key={highlight} className="flex items-start gap-3">
+                  <span
+                    className="mt-1 inline-flex h-2.5 w-2.5 flex-none rounded-full bg-sky-400"
+                    aria-hidden="true"
+                  />
+                  <span>{highlight}</span>
+                </li>
+              ))}
+            </ul>
+          )}
 
           <div className="mt-10 flex flex-col items-center gap-3 sm:flex-row md:justify-start">
             <ButtonLink href={primaryAction.href} variant="primary">
