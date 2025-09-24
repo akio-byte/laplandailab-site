@@ -17,7 +17,7 @@ import FocusAreasSection from './sections/FocusAreasSection'
 import HeroSection from './sections/HeroSection'
 import MissionSection from './sections/MissionSection'
 import ProgramsSection from './sections/ProgramsSection'
-import UpdatesSection from './sections/UpdatesSection'
+import SupabaseUpdates from './components/updates/SupabaseUpdates'
 
 const App: React.FC = () => {
   return (
@@ -44,10 +44,10 @@ const App: React.FC = () => {
           programs={programs}
         />
 
-        <UpdatesSection
+        <SupabaseUpdates
           title="Ajankohtaista Lapland AI Labissa"
           description="Seuraa kehitystä ja ajankohtaisia hankkeita. Kerromme säännöllisesti, miten yhteistyö tuottaa tuloksia Lapissa ja kansainvälisesti."
-          updates={updates}
+          fallback={updates}
         />
 
         <ContactSection
