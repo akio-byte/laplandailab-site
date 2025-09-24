@@ -1,4 +1,5 @@
 import React from 'react'
+import type { SupabaseUpdatesStatus } from '../hooks/useSupabaseUpdates'
 import type { UpdateItem } from '../types/content'
 
 interface UpdatesSectionProps {
@@ -6,6 +7,10 @@ interface UpdatesSectionProps {
   title: string
   description?: string
   updates: UpdateItem[]
+  status?: SupabaseUpdatesStatus
+  errorMessage?: string | null
+  emptyStateMessage?: string
+  meta?: React.ReactNode
 }
 
 const UpdatesSection: React.FC<UpdatesSectionProps> = ({
@@ -13,7 +18,13 @@ const UpdatesSection: React.FC<UpdatesSectionProps> = ({
   title,
   description,
   updates,
+  status = 'ready',
+  errorMessage,
+  emptyStateMessage = 'Ei ajankohtaisia päivityksiä juuri nyt.',
+  meta,
 }) => {
+  const showEmptyState = updates.length === 0
+
   return (
     <section id={id} className="bg-slate-950">
       <div className="mx-auto max-w-6xl px-6 py-20 sm:py-24">
@@ -21,35 +32,58 @@ const UpdatesSection: React.FC<UpdatesSectionProps> = ({
           <div className="max-w-3xl">
             <h2 className="text-3xl font-semibold text-white sm:text-4xl">{title}</h2>
             {description && <p className="mt-6 text-lg text-gray-300">{description}</p>}
+            {meta && <div className="mt-4 text-sm text-gray-400">{meta}</div>}
           </div>
         </div>
 
-        <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-          {updates.map((update) => (
-            <article
-              key={update.title}
-              className="flex h-full flex-col rounded-2xl border border-white/10 bg-white/[0.03] p-6 shadow-lg shadow-black/20"
-            >
-              <p className="text-xs font-semibold uppercase tracking-wide text-sky-200/80">
-                {update.date}
-              </p>
-              <h3 className="mt-4 text-xl font-semibold text-white">{update.title}</h3>
-              <p className="mt-3 flex-1 text-sm leading-relaxed text-gray-300">
-                {update.description}
-              </p>
+        {status === 'loading' && (
+          <div
+            role="status"
+            aria-live="polite"
+            className="mt-10 rounded-xl border border-white/10 bg-white/[0.02] p-4 text-sm text-gray-300"
+          >
+            Ladataan ajankohtaisia päivityksiä…
+          </div>
+        )}
 
-              {update.href && (
-                <a
-                  href={update.href}
-                  className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-sky-300 transition hover:text-sky-200"
-                >
-                  Lue lisää
-                  <span aria-hidden="true">→</span>
-                </a>
-              )}
-            </article>
-          ))}
-        </div>
+        {status === 'error' && errorMessage && (
+          <div className="mt-10 rounded-xl border border-rose-500/40 bg-rose-500/10 p-4 text-sm text-rose-100">
+            {errorMessage}
+          </div>
+        )}
+
+        {showEmptyState && status !== 'loading' ? (
+          <p className="mt-10 rounded-xl border border-dashed border-white/10 bg-white/[0.02] p-6 text-sm text-gray-300">
+            {emptyStateMessage}
+          </p>
+        ) : (
+          <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+            {updates.map((update) => (
+              <article
+                key={`${update.title}-${update.date}`}
+                className="flex h-full flex-col rounded-2xl border border-white/10 bg-white/[0.03] p-6 shadow-lg shadow-black/20"
+              >
+                <p className="text-xs font-semibold uppercase tracking-wide text-sky-200/80">
+                  {update.date}
+                </p>
+                <h3 className="mt-4 text-xl font-semibold text-white">{update.title}</h3>
+                <p className="mt-3 flex-1 text-sm leading-relaxed text-gray-300">
+                  {update.description}
+                </p>
+
+                {update.href && (
+                  <a
+                    href={update.href}
+                    className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-sky-300 transition hover:text-sky-200"
+                  >
+                    Lue lisää
+                    <span aria-hidden="true">→</span>
+                  </a>
+                )}
+              </article>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   )

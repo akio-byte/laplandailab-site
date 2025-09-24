@@ -6,21 +6,33 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "check": "npm run typecheck && npm run test",
+    "updates:digest": "node ./scripts/digest.js",
+    "browserslist:update": "npx update-browserslist-db@latest",
+    "audit:fix": "npm audit fix"
   },
   "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "@supabase/supabase-js": "^2.48.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
-    "@types/node": "^20.10.6",
-    "@types/react": "^18.2.37",
-    "@types/react-dom": "^18.2.15",
-    "@vitejs/plugin-react": "^4.2.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.2.0",
+    "@types/node": "^22.10.1",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.2",
+    "@vitejs/plugin-react": "^5.0.3",
     "autoprefixer": "^10.4.16",
     "postcss": "^8.4.31",
     "tailwindcss": "^3.3.5",
-    "typescript": "^5.2.2",
-    "vite": "^5.0.0"
+    "typescript": "^5.6.3",
+    "vite": "^7.1.7",
+    "vitest": "^3.2.4",
+    "jsdom": "^25.0.1"
   }
 }
