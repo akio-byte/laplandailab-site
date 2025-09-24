@@ -1,43 +1,24 @@
-# Lapland AI Lab -sivusto
+teksti
+# Lapland AI Lab Site
 
-Lapland AI Labin verkkosivuston koodi. Projekti on rakennettu Vite + React + TypeScript -pinolla ja tyylitetty Tailwind CSS:llä.
+## Projekti
+Lapland AI Labin sivuston koodi (React + Vite + Tailwind CSS + TypeScript).
 
-## Teknologiat
+## Asennus
+npm asennus
+npm suoritus kehitys
 
-- [Vite](https://vitejs.dev/) nopeaan kehitykseen ja buildaukseen
-- [React](https://react.dev/) käyttöliittymän rakentamiseen
-- [TypeScript](https://www.typescriptlang.org/) tyypitettyyn kehitykseen
-- [Tailwind CSS](https://tailwindcss.com/) tyylien hallintaan
+teksti
 
-## Kehitysympäristön käynnistäminen
+## Tuotanto
+npm-ajon koonti
 
-1. Asenna riippuvuudet:
+teksti
 
-   ```bash
-   npm install
-   ```
-
-2. Käynnistä kehityspalvelin:
-
-   ```bash
-   npm run dev
-   ```
-
-3. Luo tuotantoversio:
-
-   ```bash
-   npm run build
-   ```
-
-   Generoitu tuotantoversio löytyy `dist/`-hakemistosta.
-
-## Projektirakenne
-
-- `src/components` sisältää uudelleenkäytettävät käyttöliittymäkomponentit, kuten navigaation ja footerin
-- `src/sections` jakaa etusivun selkeisiin sisältöosiin (hero, painopisteet, ohjelmat, yhteystiedot)
-- `src/data` kokoaa staattiset sisältö- ja navigaatiotiedot yhteen paikkaan
-- `src/types` määrittelee ja jakaa tyypit datarakenteille
-
-## Lisenssi
-
-Tämä projekti on tarkoitettu Lapland AI Labin sisäiseen käyttöön.
+## Rakenne
+- `src/components` – Yleis- ja uudelleenkäytettävät komponentit
+- `src/sections` – Sivuston sisältöosat
+- `src/types` – TypeScript-tyypit
+- `src/data` – Staattinen sisältö
+- `public` – Julkiset resurssit (kuvat, favicon)
+- `index.html` – Sovelluksen pohja
