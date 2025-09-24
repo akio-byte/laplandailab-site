@@ -22,10 +22,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
   stats,
 }) => {
   return (
-    <section
-      id={id}
-      className="relative overflow-hidden bg-gradient-to-b from-slate-950 via-slate-950 to-slate-900"
-    >
+    <section id={id} className="relative overflow-hidden hero-section">
       <div className="absolute inset-0">
         <div className="absolute left-1/2 top-[-20%] h-[480px] w-[480px] -translate-x-1/2 rounded-full bg-sky-500/40 blur-3xl" />
         <div className="absolute bottom-[-40%] right-[-10%] h-[420px] w-[420px] rounded-full bg-cyan-400/20 blur-3xl" />

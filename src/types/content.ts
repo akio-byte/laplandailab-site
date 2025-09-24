@@ -31,6 +31,7 @@ export interface Program {
 }
 
 export interface UpdateItem {
+  id?: string
   title: string
   description: string
   date: string

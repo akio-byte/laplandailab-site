@@ -1,0 +1,11 @@
+{
+  "updates": [
+    {
+      "id": "mock-1",
+      "title": "Mock-uutinen Neonilta",
+      "description": "Käytä tätä tiedostoa paikallisessa kehityksessä, jos Neon-tietokantayhteyttä ei ole vielä konfiguroitu.",
+      "date": "Syyskuu 2024",
+      "href": "https://laplandailab.fi/mock"
+    }
+  ]
+}
