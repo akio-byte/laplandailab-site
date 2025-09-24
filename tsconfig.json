@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
+    "target": "ES2022",
     "useDefineForClassFields": true,
     "lib": ["DOM", "DOM.Iterable", "ES2020"],
     "module": "ESNext",
@@ -14,8 +14,15 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "types": [
+      "vite/client",
+      "vitest",
+      "vitest/globals",
+      "@testing-library/jest-dom",
+      "vitest-axe/matchers"
+    ]
   },
-  "include": ["src"],
+  "include": ["src", "netlify"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

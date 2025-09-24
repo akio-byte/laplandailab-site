@@ -1,11 +1,18 @@
 import React from 'react'
 import type { UpdateItem } from '../types/content'
 
+interface UpdatesSectionStatus {
+  isLoading: boolean
+  isFallback: boolean
+  error?: string
+}
+
 interface UpdatesSectionProps {
   id?: string
   title: string
   description?: string
   updates: UpdateItem[]
+  status?: UpdatesSectionStatus
 }
 
 const UpdatesSection: React.FC<UpdatesSectionProps> = ({
@@ -13,9 +20,24 @@ const UpdatesSection: React.FC<UpdatesSectionProps> = ({
   title,
   description,
   updates,
+  status,
 }) => {
+  const statusMessage = (() => {
+    if (!status) return undefined
+    if (status.isLoading) {
+      return 'Haetaan ajankohtaista dataa Neon-tietokannasta…'
+    }
+    if (status.error) {
+      return `Neonin tietokantakysely epäonnistui. Näytetään varmuuskopioitu sisältö. (${status.error})`
+    }
+    if (status.isFallback) {
+      return 'Neon ei palauttanut nostoja. Näytetään varmuuskopioitu sisältö, kunnes data on saatavilla.'
+    }
+    return 'Ajankohtainen data on ladattu suoraan Neon-tietokannasta.'
+  })()
+
   return (
-    <section id={id} className="bg-slate-950">
+    <section id={id} className="updates-section">
       <div className="mx-auto max-w-6xl px-6 py-20 sm:py-24">
         <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <div className="max-w-3xl">
@@ -24,11 +46,21 @@ const UpdatesSection: React.FC<UpdatesSectionProps> = ({
           </div>
         </div>
 
+        {statusMessage && (
+          <p
+            role="status"
+            aria-live="polite"
+            className="updates-status mt-8 rounded-lg p-4 text-sm"
+          >
+            {statusMessage}
+          </p>
+        )}
+
         <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
           {updates.map((update) => (
             <article
-              key={update.title}
-              className="flex h-full flex-col rounded-2xl border border-white/10 bg-white/[0.03] p-6 shadow-lg shadow-black/20"
+              key={update.id ?? update.title}
+              className="updates-card flex h-full flex-col rounded-2xl border p-6 shadow-lg"
             >
               <p className="text-xs font-semibold uppercase tracking-wide text-sky-200/80">
                 {update.date}

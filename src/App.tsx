@@ -10,8 +10,9 @@ import {
   missionItems,
   navigation,
   programs,
-  updates,
 } from './data/siteContent'
+import { fallbackUpdates } from './data/fallbackUpdates'
+import { useUpdates } from './hooks/useUpdates'
 import ContactSection from './sections/ContactSection'
 import FocusAreasSection from './sections/FocusAreasSection'
 import HeroSection from './sections/HeroSection'
@@ -20,8 +21,21 @@ import ProgramsSection from './sections/ProgramsSection'
 import UpdatesSection from './sections/UpdatesSection'
 
 const App: React.FC = () => {
+  const { updates: remoteUpdates, isLoading, error } = useUpdates()
+  const hasRemoteUpdates = remoteUpdates.length > 0
+  const updates = hasRemoteUpdates ? remoteUpdates : fallbackUpdates
+
+  const theme =
+    typeof document !== 'undefined' ? document.documentElement.dataset.theme ?? 'dark' : 'dark'
+
+  React.useEffect(() => {
+    if (typeof document !== 'undefined') {
+      document.documentElement.dataset.theme = theme
+    }
+  }, [theme])
+
   return (
-    <div className="bg-slate-950 text-slate-100">
+    <div className="app-shell" data-theme={theme}>
       <SiteHeader navigation={navigation} />
       <main>
         <HeroSection {...heroContent} />
@@ -48,6 +62,11 @@ const App: React.FC = () => {
           title="Ajankohtaista Lapland AI Labissa"
           description="Seuraa kehitystä ja ajankohtaisia hankkeita. Kerromme säännöllisesti, miten yhteistyö tuottaa tuloksia Lapissa ja kansainvälisesti."
           updates={updates}
+          status={{
+            isLoading,
+            error,
+            isFallback: !hasRemoteUpdates && !isLoading,
+          }}
         />
 
         <ContactSection

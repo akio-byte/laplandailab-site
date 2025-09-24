@@ -3,17 +3,119 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    color-scheme: dark;
+    --body-bg: #020617;
+    --body-text: #e2e8f0;
+    --surface-bg: rgba(255, 255, 255, 0.03);
+    --surface-border: rgba(255, 255, 255, 0.1);
+    --status-bg: rgba(56, 189, 248, 0.1);
+    --status-border: rgba(56, 189, 248, 0.4);
+    --status-text: #bae6fd;
+  }
+
+  :root[data-theme='light'] {
+    color-scheme: light;
+    --body-bg: #f8fafc;
+    --body-text: #0f172a;
+    --surface-bg: rgba(15, 23, 42, 0.04);
+    --surface-border: rgba(15, 23, 42, 0.12);
+    --status-bg: rgba(2, 132, 199, 0.08);
+    --status-border: rgba(2, 132, 199, 0.35);
+    --status-text: #0f172a;
+  }
+
   html {
     @apply scroll-smooth;
   }
 
   body {
-    @apply bg-slate-950 text-slate-100 antialiased;
+    @apply antialiased;
+    background-color: var(--body-bg);
+    color: var(--body-text);
   }
 
   a {
     @apply transition-colors;
   }
+}
+
+.app-shell {
+  min-height: 100vh;
+  background-color: var(--body-bg);
+  color: var(--body-text);
+}
+
+.app-shell[data-theme='light'] .text-white {
+  color: #0f172a;
+}
+
+.app-shell[data-theme='light'] .text-gray-200 {
+  color: #1f2937;
+}
+
+.app-shell[data-theme='light'] .text-gray-300 {
+  color: #334155;
+}
+
+.app-shell[data-theme='light'] .text-sky-200\/80,
+.app-shell[data-theme='light'] .text-sky-300 {
+  color: #0369a1;
+}
+
+.app-shell[data-theme='light'] .bg-slate-950 {
+  background-color: #f1f5f9;
+}
+
+.app-shell[data-theme='light'] .bg-slate-950\/80 {
+  background-color: rgba(241, 245, 249, 0.85);
+}
+
+.app-shell[data-theme='light'] .border-white\/10 {
+  border-color: rgba(15, 23, 42, 0.08);
+}
+
+.app-shell[data-theme='light'] .bg-white\/\[0\.03\] {
+  background-color: rgba(15, 23, 42, 0.04);
+}
+
+.app-shell[data-theme='light'] .hover\:bg-white\/10:hover {
+  background-color: rgba(15, 23, 42, 0.08);
+}
+
+.app-shell[data-theme='light'] .focus-visible\:ring-offset-slate-950:focus-visible {
+  --tw-ring-offset-color: #f8fafc;
+}
+
+.hero-section {
+  background: linear-gradient(180deg, rgba(2, 6, 23, 1) 0%, rgba(2, 6, 23, 1) 60%, rgba(15, 23, 42, 1) 100%);
+  color: inherit;
+}
+
+.app-shell[data-theme='light'] .hero-section {
+  background: linear-gradient(180deg, rgba(224, 242, 254, 1) 0%, rgba(191, 219, 254, 1) 60%, rgba(255, 255, 255, 1) 100%);
+  color: #0f172a;
+}
+
+.updates-section {
+  background-color: var(--body-bg);
+  color: inherit;
+}
+
+.updates-card {
+  background-color: var(--surface-bg);
+  border-color: var(--surface-border);
+  box-shadow: 0 20px 45px rgba(15, 23, 42, 0.25);
+}
+
+.app-shell[data-theme='light'] .updates-card {
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.15);
+}
+
+.updates-status {
+  background-color: var(--status-bg);
+  border: 1px solid var(--status-border);
+  color: var(--status-text);
 }
 
 ::selection {

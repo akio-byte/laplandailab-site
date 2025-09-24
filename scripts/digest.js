@@ -3,7 +3,7 @@
  * Fetches sources and writes a Markdown digest to the updates directory.
  */
 
-import fs from "fs";
+import fs from "fs/promises";
 import path from "path";
 
 const SOURCES = [
@@ -24,10 +24,12 @@ function parseRSS(xml, limit = 5) {
     .slice(0, limit)
     .map((m) => {
       const block = m[1];
-      const title =
-        (block.match(/<title>(<!\[CDATA\[)?([\s\S]*?)(\]\]>)?<\/title>/) || [, "", ""])[2].trim();
-      const link = (block.match(/<link>([\s\S]*?)<\/link>/) || [, ""])[1].trim();
-      const pub = (block.match(/<pubDate>([\s\S]*?)<\/pubDate>/) || [, ""])[1].trim();
+      const titleMatch = block.match(/<title>(<!\[CDATA\[)?([\s\S]*?)(\]\]>)?<\/title>/);
+      const linkMatch = block.match(/<link>([\s\S]*?)<\/link>/);
+      const pubMatch = block.match(/<pubDate>([\s\S]*?)<\/pubDate>/);
+      const title = titleMatch?.[2]?.trim() ?? '';
+      const link = linkMatch?.[1]?.trim() ?? '';
+      const pub = pubMatch?.[1]?.trim() ?? '';
       return { title, link, pubDate: pub };
     });
   return items;
@@ -48,13 +50,19 @@ function formatDate(d = new Date()) {
 
 async function main() {
   const collected = [];
+  const errors = [];
   for (const s of SOURCES) {
     try {
       const raw = await fetchText(s.url);
       const items = s.type === "rss" ? parseRSS(raw, 5) : [];
+      if (items.length === 0) {
+        errors.push({ source: s.name, reason: "No entries returned" });
+      }
       collected.push({ source: s.name, items });
     } catch (e) {
-      collected.push({ source: s.name, items: [], error: String(e) });
+      const message = e instanceof Error ? e.message : String(e);
+      errors.push({ source: s.name, reason: message });
+      collected.push({ source: s.name, items: [], error: message });
     }
   }
 
@@ -79,10 +87,21 @@ async function main() {
   }
 
   const outDir = path.join(process.cwd(), "updates");
-  if (!fs.existsSync(outDir)) fs.mkdirSync(outDir);
+  await fs.mkdir(outDir, { recursive: true });
   const outFile = path.join(outDir, `${slug}.md`);
-  fs.writeFileSync(outFile, md, "utf8");
-  console.log(`Wrote ${outFile}`);
+  await fs.writeFile(outFile, md, "utf8");
+  console.log(`Weekly digest kirjoitettu tiedostoon: ${outFile}`);
+
+  if (errors.length > 0) {
+    console.warn("Digest-prosessissa havaittuja ongelmia:");
+    for (const err of errors) {
+      console.warn(`- ${err.source}: ${err.reason}`);
+    }
+    const allFailed = errors.length === SOURCES.length;
+    if (allFailed) {
+      throw new Error("Kaikki lähteet epäonnistuivat – tarkista verkko tai lähteiden URL-osoitteet.");
+    }
+  }
 }
 
 main().catch((err) => {
