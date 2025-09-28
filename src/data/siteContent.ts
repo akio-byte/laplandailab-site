@@ -9,12 +9,31 @@ import type {
   UpdateItem,
 } from '../types/content'
 
+// Navigation in Finnish (original)
 export const navigation: NavItem[] = [
   { label: 'Toiminta', href: '#mission' },
   { label: 'Painopisteet', href: '#focus' },
   { label: 'Ohjelmat', href: '#programs' },
   { label: 'Ajankohtaista', href: '#updates' },
   { label: 'Yhteys', href: '#contact' },
+]
+
+// Navigation in English
+export const navigationEn: NavItem[] = [
+  { label: 'Mission', href: '#mission' },
+  { label: 'Focus Areas', href: '#focus' },
+  { label: 'Programs', href: '#programs' },
+  { label: 'Updates', href: '#updates' },
+  { label: 'Contact', href: '#contact' },
+]
+
+// Navigation in Swedish
+export const navigationSv: NavItem[] = [
+  { label: 'Verksamhet', href: '#mission' },
+  { label: 'Fokusområden', href: '#focus' },
+  { label: 'Program', href: '#programs' },
+  { label: 'Aktuellt', href: '#updates' },
+  { label: 'Kontakt', href: '#contact' },
 ]
 
 export const heroContent = {
