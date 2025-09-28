@@ -18,6 +18,8 @@ import HeroSection from './sections/HeroSection'
 import MissionSection from './sections/MissionSection'
 import ProgramsSection from './sections/ProgramsSection'
 import UpdatesSection from './sections/UpdatesSection'
+import ProjectsGrid from './components/projects/ProjectsGrid'
+import BlogList from './components/blog/BlogList'
 
 const App: React.FC = () => {
   return (
@@ -38,11 +40,15 @@ const App: React.FC = () => {
           areas={focusAreas}
         />
 
+        <ProjectsGrid language="fi" />
+
         <ProgramsSection
           title="Ohjelmat ja palvelut"
           description="Rakennamme polkuja ideasta vaikuttavaksi ratkaisuksi. Ohjelmamme yhdistävät tutkimuksen, yritysten tarpeet ja opiskelijoiden osaamisen."
           programs={programs}
         />
+
+        <BlogList language="fi" />
 
         <UpdatesSection
           title="Ajankohtaista Lapland AI Labissa"
