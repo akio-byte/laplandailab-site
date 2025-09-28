@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import SiteFooter from './components/layout/SiteFooter'
 import SiteHeader from './components/layout/SiteHeader'
 import {
@@ -19,37 +19,44 @@ import MissionSection from './sections/MissionSection'
 import ProgramsSection from './sections/ProgramsSection'
 import UpdatesSection from './sections/UpdatesSection'
 
+type Language = 'fi' | 'en' | 'sv'
+
 const App: React.FC = () => {
+  const [currentLanguage, setCurrentLanguage] = useState<Language>('fi')
+
+  const handleLanguageChange = (language: Language) => {
+    setCurrentLanguage(language)
+  }
+
   return (
     <div className="bg-slate-950 text-slate-100">
-      <SiteHeader navigation={navigation} />
+      <SiteHeader 
+        navigation={navigation} 
+        currentLanguage={currentLanguage}
+        onLanguageChange={handleLanguageChange}
+      />
       <main>
         <HeroSection {...heroContent} />
-
         <MissionSection
           title="Toimimme Lapin tekoälyn moottorina"
           description={missionDescription}
           items={missionItems}
         />
-
         <FocusAreasSection
           title="Painopistealueet"
           description="Monialainen kehitystyö keskittyy arktisiin olosuhteisiin sopiviin ratkaisuihin, vastuulliseen liiketoimintaan sekä alueen osaamisen kasvattamiseen."
           areas={focusAreas}
         />
-
         <ProgramsSection
           title="Ohjelmat ja palvelut"
           description="Rakennamme polkuja ideasta vaikuttavaksi ratkaisuksi. Ohjelmamme yhdistävät tutkimuksen, yritysten tarpeet ja opiskelijoiden osaamisen."
           programs={programs}
         />
-
         <UpdatesSection
           title="Ajankohtaista Lapland AI Labissa"
           description="Seuraa kehitystä ja ajankohtaisia hankkeita. Kerromme säännöllisesti, miten yhteistyö tuottaa tuloksia Lapissa ja kansainvälisesti."
           updates={updates}
         />
-
         <ContactSection
           title="Ota yhteyttä tiimiimme"
           description={contactIntro}
@@ -61,7 +68,7 @@ const App: React.FC = () => {
           note="Kerro viestissä taustastasi ja tavoitteistasi – palaamme pian ehdotuksella etenemisestä."
         />
       </main>
-      <SiteFooter navigation={navigation} />
+      <SiteFooter />
     </div>
   )
 }
