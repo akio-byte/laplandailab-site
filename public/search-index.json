@@ -1,0 +1,41 @@
+[
+  {
+    "id": "project-first",
+    "titleFi": "Esimerkkiprojekti 1",
+    "titleEn": "Sample Project 1",
+    "urlFi": "/projects/first-project",
+    "urlEn": "/projects/first-project",
+    "summaryFi": "Ensimmäinen esimerkkiprojekti Lapland AI Labin portfolioon.",
+    "summaryEn": "First sample project for Lapland AI Lab portfolio."
+  },
+  {
+    "id": "project-second",
+    "titleFi": "Esimerkkiprojekti 2",
+    "titleEn": "Sample Project 2",
+    "urlFi": "/projects/second-project",
+    "urlEn": "/projects/second-project",
+    "summaryFi": "Toinen esimerkkiprojekti Lapland AI Labin portfolioon.",
+    "summaryEn": "Second sample project for Lapland AI Lab portfolio."
+  },
+  {
+    "id": "project-third",
+    "titleFi": "Esimerkkiprojekti 3",
+    "titleEn": "Sample Project 3",
+    "urlFi": "/projects/third-project",
+    "urlEn": "/projects/third-project",
+    "summaryFi": "Kolmas esimerkkiprojekti Lapland AI Labin portfolioon.",
+    "summaryEn": "Third sample project for Lapland AI Lab portfolio."
+  },
+  {
+    "id": "blog-welcome-fi",
+    "titleFi": "Tervetuloa blogiimme",
+    "urlFi": "/blog/welcome-fi",
+    "summaryFi": "Tämä on Lapland AI Labin ensimmäinen suomenkielinen blogipostaus."
+  },
+  {
+    "id": "blog-welcome-en",
+    "titleEn": "Welcome to our blog",
+    "urlEn": "/blog/welcome-en",
+    "summaryEn": "This is Lapland AI Lab's first English blog post."
+  }
+]

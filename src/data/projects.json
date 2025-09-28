@@ -1,0 +1,38 @@
+[
+  {
+    "slug": "ai-demo",
+    "titleFi": "AI Demo - Projekti",
+    "titleEn": "AI Demo Project",
+    "summaryFi": "Esimerkkiprojekti, joka näyttää tekoälyratkaisun.",
+    "summaryEn": "Example project showcasing an AI solution.",
+    "descriptionFi": "Tämä on pidempi kuvaus tekoälyprojektista suomeksi. Se sisältää tietoa tarkoituksesta ja lopputuloksesta.",
+    "descriptionEn": "This is a longer description of the AI project in English, including purpose and outcome.",
+    "tags": ["AI", "Demo"],
+    "date": "2025-09-20",
+    "hero": "/images/projects/ai-demo.jpg"
+  },
+  {
+    "slug": "weather-predictor",
+    "titleFi": "Sään Ennustaja",
+    "titleEn": "Weather Predictor",
+    "summaryFi": "Projektimme hyödyntää koneoppimista sään ennustamiseen.",
+    "summaryEn": "Our project uses machine learning to predict the weather.",
+    "descriptionFi": "Pitkä kuvaus sään ennustusprojektista suomeksi.",
+    "descriptionEn": "Long description of the weather prediction project in English.",
+    "tags": ["ML", "Data"],
+    "date": "2025-08-15",
+    "hero": "/images/projects/weather.jpg"
+  },
+  {
+    "slug": "forest-monitor",
+    "titleFi": "Metsän Valvonta",
+    "titleEn": "Forest Monitoring",
+    "summaryFi": "IoT-järjestelmä metsien seurantaan.",
+    "summaryEn": "An IoT system for monitoring forests.",
+    "descriptionFi": "Pitkä kuvaus metsän valvontaprojektista suomeksi.",
+    "descriptionEn": "Long description of the forest monitoring project in English.",
+    "tags": ["IoT", "Environment"],
+    "date": "2025-07-10",
+    "hero": "/images/projects/forest.jpg"
+  }
+]
