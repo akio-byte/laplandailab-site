@@ -12,6 +12,8 @@ import type {
 export const navigation: NavItem[] = [
   { label: 'Toiminta', href: '#mission' },
   { label: 'Painopisteet', href: '#focus' },
+    { label: 'Projektit', href: '#projects' },
+  { label: 'Blogi', href: '#blog' },
   { label: 'Ohjelmat', href: '#programs' },
   { label: 'Ajankohtaista', href: '#updates' },
   { label: 'Yhteys', href: '#contact' },
