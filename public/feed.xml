@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Lapland AI Lab Blog</title>
+    <link>https://laplandailab.fi/blog</link>
+    <description>Latest posts from Lapland AI Lab</description>
+    <language>fi</language>
+    <item>
+      <title>Tervetuloa blogiimme</title>
+      <link>https://laplandailab.fi/blog/welcome-fi</link>
+      <description>Tämä on Lapland AI Labin ensimmäinen suomenkielinen blogipostaus.</description>
+      <pubDate>2025-01-01</pubDate>
+      <guid>https://laplandailab.fi/blog/welcome-fi</guid>
+    </item>
+    <item>
+      <title>Welcome to our blog</title>
+      <link>https://laplandailab.fi/blog/welcome-en</link>
+      <description>This is Lapland AI Lab's first English blog post.</description>
+      <pubDate>2025-01-01</pubDate>
+      <guid>https://laplandailab.fi/blog/welcome-en</guid>
+    </item>
+  </channel>
+</rss>
