@@ -2,16 +2,28 @@ import React from 'react'
 import { NavItem } from '../../types/content'
 import ButtonLink from '../ui/ButtonLink'
 
+type Language = 'fi' | 'en' | 'sv'
+
 interface SiteHeaderProps {
   navigation: NavItem[]
+  currentLanguage: Language
   contactHref?: string
+  onLanguageChange?: (language: Language) => void
 }
 
 const SiteHeader: React.FC<SiteHeaderProps> = ({
   navigation,
+  currentLanguage,
   contactHref = '#contact',
+  onLanguageChange,
 }) => {
   const [menuOpen, setMenuOpen] = React.useState(false)
+
+  const handleLanguageChange = (language: Language) => {
+    if (onLanguageChange) {
+      onLanguageChange(language)
+    }
+  }
 
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-slate-950/80 backdrop-blur">
@@ -22,7 +34,6 @@ const SiteHeader: React.FC<SiteHeaderProps> = ({
         >
           Lapland<span className="text-sky-400">AI</span>Lab
         </a>
-
         <nav
           aria-label="Päävalikko"
           className="hidden items-center gap-8 text-sm font-medium text-gray-200 md:flex"
@@ -37,8 +48,43 @@ const SiteHeader: React.FC<SiteHeaderProps> = ({
             </a>
           ))}
         </nav>
-
         <div className="flex items-center gap-3">
+          {/* Language switcher */}
+          <div className="hidden md:flex items-center gap-2 mr-3">
+            <button
+              type="button"
+              onClick={() => handleLanguageChange('fi')}
+              className={`px-2 py-1 text-sm rounded transition ${
+                currentLanguage === 'fi'
+                  ? 'bg-sky-500 text-white'
+                  : 'text-gray-300 hover:text-white'
+              }`}
+            >
+              FI
+            </button>
+            <button
+              type="button"
+              onClick={() => handleLanguageChange('en')}
+              className={`px-2 py-1 text-sm rounded transition ${
+                currentLanguage === 'en'
+                  ? 'bg-sky-500 text-white'
+                  : 'text-gray-300 hover:text-white'
+              }`}
+            >
+              EN
+            </button>
+            <button
+              type="button"
+              onClick={() => handleLanguageChange('sv')}
+              className={`px-2 py-1 text-sm rounded transition ${
+                currentLanguage === 'sv'
+                  ? 'bg-sky-500 text-white'
+                  : 'text-gray-300 hover:text-white'
+              }`}
+            >
+              SV
+            </button>
+          </div>
           <ButtonLink
             href={contactHref}
             className="hidden text-sm md:inline-flex"
@@ -46,7 +92,6 @@ const SiteHeader: React.FC<SiteHeaderProps> = ({
           >
             Ota yhteyttä
           </ButtonLink>
-
           <button
             type="button"
             onClick={() => setMenuOpen((open) => !open)}
@@ -79,7 +124,6 @@ const SiteHeader: React.FC<SiteHeaderProps> = ({
           </button>
         </div>
       </div>
-
       {menuOpen && (
         <div className="border-t border-white/10 bg-slate-950 md:hidden">
           <nav
@@ -96,7 +140,52 @@ const SiteHeader: React.FC<SiteHeaderProps> = ({
                 {item.label}
               </a>
             ))}
-
+            {/* Mobile language switcher */}
+            <div className="flex items-center gap-2 mt-3 mb-2">
+              <span className="text-gray-400 text-sm">Language:</span>
+              <button
+                type="button"
+                onClick={() => {
+                  handleLanguageChange('fi')
+                  setMenuOpen(false)
+                }}
+                className={`px-2 py-1 text-sm rounded transition ${
+                  currentLanguage === 'fi'
+                    ? 'bg-sky-500 text-white'
+                    : 'text-gray-300 hover:text-white'
+                }`}
+              >
+                FI
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  handleLanguageChange('en')
+                  setMenuOpen(false)
+                }}
+                className={`px-2 py-1 text-sm rounded transition ${
+                  currentLanguage === 'en'
+                    ? 'bg-sky-500 text-white'
+                    : 'text-gray-300 hover:text-white'
+                }`}
+              >
+                EN
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  handleLanguageChange('sv')
+                  setMenuOpen(false)
+                }}
+                className={`px-2 py-1 text-sm rounded transition ${
+                  currentLanguage === 'sv'
+                    ? 'bg-sky-500 text-white'
+                    : 'text-gray-300 hover:text-white'
+                }`}
+              >
+                SV
+              </button>
+            </div>
             <ButtonLink
               href={contactHref}
               variant="primary"
