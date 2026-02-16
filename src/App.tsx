@@ -30,8 +30,8 @@ const App: React.FC = () => {
 
   return (
     <div className="bg-slate-950 text-slate-100">
-      <SiteHeader 
-        navigation={navigation} 
+      <SiteHeader
+        navigation={navigation}
         currentLanguage={currentLanguage}
         onLanguageChange={handleLanguageChange}
       />
@@ -68,7 +68,7 @@ const App: React.FC = () => {
           note="Kerro viestissä taustastasi ja tavoitteistasi – palaamme pian ehdotuksella etenemisestä."
         />
       </main>
-      <SiteFooter />
+      <SiteFooter navigation={navigation} />
     </div>
   )
 }
